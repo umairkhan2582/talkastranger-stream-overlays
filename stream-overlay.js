@@ -1,13 +1,14 @@
 /**
  * TalkAStranger Stream Overlay Widget Engine
- * @version 1.0.0
+ * @version 1.1.0
  * @license MIT
  * 
  * Lightweight, responsive stream alert widget for OBS Studio / Streamlabs.
  * Takes a URL parameter (streamerUsername) and dynamically generates
- * on-screen community alert widgets with SEO backlinks.
+ * on-screen community alert widgets with a profile link for viewers.
  * 
  * GitHub: https://github.com/umairkhan2582/talkastranger-stream-overlays
+ * Creator Studio: https://talkastranger.com/creator-studio
  * Homepage: https://talkastranger.com
  */
 
@@ -16,14 +17,12 @@
 
   const ENDPOINT = "https://talkastranger.com";
 
-  // Parse URL parameters
   const params = new URLSearchParams(window.location.search);
   const streamerUsername = params.get("streamerUsername") || "creator";
   const theme = params.get("theme") || "dark";
-  const showBacklink = params.get("showBacklink") !== "false";
+  const showProfileLink = params.get("showProfileLink") !== "false";
   const position = params.get("position") || "bottom";
 
-  // Theme palettes
   const themes = {
     dark: { bg: "linear-gradient(135deg, #09090b 0%, #18181b 100%)", border: "#a855f7", accent: "#a855f7" },
     light: { bg: "linear-gradient(135deg, #ffffff 0%, #f4f4f5 100%)", border: "#8b5cf6", accent: "#7c3aed" },
@@ -32,7 +31,6 @@
   };
   const palette = themes[theme] || themes.dark;
 
-  // Position the container
   const container = document.getElementById("overlay-container");
   if (container) {
     if (position === "top") {
@@ -45,20 +43,19 @@
     }
   }
 
-  // Render backlink
-  if (showBacklink) {
-    const backlinkEl = document.getElementById("backlink");
-    if (backlinkEl) {
+  // Render profile link
+  if (showProfileLink) {
+    const linkEl = document.getElementById("profile-link");
+    if (linkEl) {
       const link = document.createElement("a");
       link.href = `${ENDPOINT}/${streamerUsername}`;
       link.textContent = `talkastranger.com/${streamerUsername}`;
       link.target = "_blank";
-      backlinkEl.appendChild(document.createTextNode("Support this stream: "));
-      backlinkEl.appendChild(link);
+      linkEl.appendChild(document.createTextNode("Support this stream: "));
+      linkEl.appendChild(link);
     }
   }
 
-  // Alert types
   const ALERT_TYPES = [
     { icon: "\uD83D\uDC4B", title: "New Viewer", message: "{user} just joined your stream!" },
     { icon: "\u2728", title: "New Spark", message: "{user} sent you {amount} Sparks!" },
@@ -103,14 +100,11 @@
 
     alertsContainer.appendChild(alertEl);
 
-    // Remove after animation
     setTimeout(() => {
       if (alertEl.parentNode) alertEl.parentNode.removeChild(alertEl);
     }, 5500);
   }
 
-  // Demo mode: show alerts every 4-8 seconds
-  // In production, connect to TalkAStranger real-time API
   function startDemo() {
     showAlert();
     setInterval(() => {
@@ -119,13 +113,12 @@
     }, 4000 + Math.random() * 4000);
   }
 
-  // Start after a brief delay
   setTimeout(startDemo, 1500);
 
-  // Public API for manual alert injection
   window.TalkAStrangerOverlay = {
     showAlert: showAlert,
     username: streamerUsername,
     profileUrl: `${ENDPOINT}/${streamerUsername}`,
+    creatorStudio: `${ENDPOINT}/creator-studio`,
   };
 })();
