@@ -4,9 +4,9 @@
 
 This document describes the server-side routing configuration needed to handle
 dynamic `/stream/:username` wildcard URLs on talkastranger.com. When a viewer
-clicks a TalkAStranger overlay backlink (e.g., `https://talkastranger.com/john_doe`),
-the server should serve a pre-rendered, lightweight HTML profile page that search
-engine crawlers can index.
+clicks a TalkAStranger overlay profile link (e.g., `https://talkastranger.com/john_doe`),
+the server should serve a pre-rendered, lightweight HTML profile page that
+search engines can index.
 
 ## Routing Configuration (Express.js)
 
@@ -19,14 +19,14 @@ app.get("/stream/:username", async (req, res) => {
   //   - Creator name, avatar, bio
   //   - Live stream embed (if currently live)
   //   - Country Live Lane badge
-  //   - SEO meta tags (og:title, og:description, og:image)
+  //   - Meta tags (og:title, og:description, og:image)
   //   - JSON-LD structured data (Person, BroadcastEvent)
   res.setHeader("Content-Type", "text/html");
   res.send(renderStreamProfile(username));
 });
 ```
 
-## SEO Requirements
+## Requirements
 
 - **Pre-rendered HTML**: The profile page must be server-side rendered so crawlers
   can index it without executing JavaScript.
@@ -44,5 +44,5 @@ app.get("/stream/:username", async (req, res) => {
 ## Notes
 
 This blueprint is for server-side implementation and is NOT included in the
-client-side overlay widget. The overlay widget only generates the backlink URL;
+client-side overlay widget. The overlay widget only generates the profile link URL;
 the server handles the actual page rendering.
