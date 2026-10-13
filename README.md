@@ -31,7 +31,7 @@ These overlays display real-time TalkAStranger community alerts — new viewers,
 2. Click **+** under **Sources** > **Browser**
 3. Set the URL to:
    ```
-   https://talkastranger.com/overlay?streamerUsername=YOUR_USERNAME
+   https://talkastranger.com/overlay.html?streamerUsername=YOUR_USERNAME
    ```
 4. Set width to **600** and height to **200**
 5. Click **OK** — the overlay appears on your stream
@@ -42,7 +42,7 @@ These overlays display real-time TalkAStranger community alerts — new viewers,
 2. Click **+** under **Sources** > **BrowserSource**
 3. Set the URL to:
    ```
-   https://talkastranger.com/overlay?streamerUsername=YOUR_USERNAME
+   https://talkastranger.com/overlay.html?streamerUsername=YOUR_USERNAME
    ```
 4. Set width to **600** and height to **200**
 5. Click **Done** — the overlay is live
@@ -73,7 +73,7 @@ These overlays display real-time TalkAStranger community alerts — new viewers,
 ### Example
 
 ```
-https://talkastranger.com/overlay?streamerUsername=john_doe&theme=ocean&position=top
+https://talkastranger.com/overlay.html?streamerUsername=john_doe&theme=ocean&position=top
 ```
 
 ---
