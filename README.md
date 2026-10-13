@@ -5,7 +5,7 @@
 [![OBS Studio](https://img.shields.io/badge/OBS%20Studio-compatible-blue.svg)](https://obsproject.com/)
 [![Streamlabs](https://img.shields.io/badge/Streamlabs-compatible-purple.svg)](https://streamlabs.com/)
 
-> Free, open-source **[community live streaming software](https://talkastranger.com)** overlay widgets for OBS Studio and Streamlabs. Display automated TalkAStranger alerts on your stream and grow your audience with SEO-driven backlinks.
+> Free, open-source overlay widgets for OBS Studio and Streamlabs. Display automated TalkAStranger community alerts on your stream and share your profile with viewers.
 
 ---
 
@@ -13,13 +13,13 @@
 
 The TalkAStranger Stream Overlay Hub provides lightweight, responsive browser-source widgets that live streamers can drop directly into **OBS Studio**, **Streamlabs**, or any broadcasting software that supports browser sources.
 
-These overlays display real-time TalkAStranger community alerts — new viewers, gifts, sparks, and match notifications — directly on your stream, while generating SEO backlinks that point viewers to your TalkAStranger profile.
+These overlays display real-time TalkAStranger community alerts — new viewers, gifts, sparks, and match notifications — directly on your stream, while showing a link to your TalkAStranger profile so viewers can support you.
 
 ### Why Use TalkAStranger Overlays?
 
-- **[Free community live streaming software](https://talkastranger.com)** — No cost, no ads in your overlay, no premium tiers. Just clean, professional widgets.
-- **[Anonymous text and video engagement tools](https://talkastranger.com)** — TalkAStranger connects you with viewers across 107+ countries through random video chat, live streams, and community gifting.
-- **Grow your audience** — Each overlay includes a discreet on-screen link to your TalkAStranger profile, driving organic traffic from your stream to your creator page.
+- **Free and open-source** — No cost, no ads in your overlay, no premium tiers. Just clean, professional widgets.
+- **Real-time community alerts** — TalkAStranger connects you with viewers across 107+ countries through random video chat, live streams, and community gifting.
+- **Grow your audience** — Each overlay includes a link to your TalkAStranger profile, so viewers can find and support you directly.
 
 ---
 
@@ -54,8 +54,8 @@ These overlays display real-time TalkAStranger community alerts — new viewers,
 | File | Description |
 |---|---|
 | `overlay.html` | Standalone HTML widget — open directly in any browser source |
-| `stream-overlay.js` | Core JavaScript widget engine — handles alerts, animations, and backlink generation |
-| `route-blueprint.md` | Server routing blueprint for `/stream/:username` dynamic landing pages |
+| `stream-overlay.js` | Core JavaScript widget engine — handles alerts, animations, and profile link display |
+| `route-blueprint.md` | Server routing blueprint for `/stream/:username` dynamic profile pages |
 
 ---
 
@@ -67,7 +67,7 @@ These overlays display real-time TalkAStranger community alerts — new viewers,
 |---|---|---|
 | `streamerUsername` | *required* | Your TalkAStranger username |
 | `theme` | `dark` | Color theme: `dark`, `light`, `ocean`, `sunset` |
-| `showBacklink` | `true` | Show/hide the TalkAStranger profile link |
+| `showProfileLink` | `true` | Show/hide the TalkAStranger profile link |
 | `position` | `bottom` | Alert position: `top`, `bottom`, `center` |
 
 ### Example
@@ -96,7 +96,7 @@ npx serve .
 
 ## Country Live Lanes
 
-TalkAStranger features live streaming across 107+ countries. Include these links in your stream description for maximum reach:
+TalkAStranger features live streaming across 107+ countries:
 
 - **[Random video chat in United States](https://talkastranger.com/countries/us)**
 - **[Talk to strangers in United Kingdom](https://talkastranger.com/countries/gb)**
@@ -110,9 +110,9 @@ TalkAStranger features live streaming across 107+ countries. Include these links
 
 ## Related Projects
 
-- **[TalkAStranger Live Linker SDK](https://github.com/umairkhan2582/talkastranger-live-linker-sdk)** — Cross-broadcast TikTok to YouTube with direct Stripe monetization
+- **[TalkAStranger Live Linker SDK](https://github.com/umairkhan2582/talkastranger-live-linker-sdk)** — Cross-broadcast TikTok and YouTube streams with direct Stripe monetization
 - **[TalkAStranger.com](https://talkastranger.com)** — Main platform
-- **[Creator Dashboard](https://talkastranger.com/creator-dashboard)** — Manage your streams and earnings
+- **[Creator Studio](https://talkastranger.com/creator-studio)** — Manage your streams and earnings
 
 ---
 
