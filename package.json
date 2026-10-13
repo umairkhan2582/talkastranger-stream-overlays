@@ -1,0 +1,25 @@
+{
+  "name": "talkastranger-stream-overlays",
+  "version": "1.0.0",
+  "description": "Free open-source OBS Studio and Streamlabs overlay widgets for TalkAStranger \u2014 display live community alerts and grow your audience with SEO-driven stream overlays.",
+  "main": "stream-overlay.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umairkhan2582/talkastranger-stream-overlays.git"
+  },
+  "keywords": [
+    "obs-studio",
+    "streamlabs",
+    "obs-overlay",
+    "browser-source",
+    "stream-alerts",
+    "streaming-widgets",
+    "talkastranger"
+  ],
+  "author": "TalkAStranger Team <support@talkastranger.com> (https://talkastranger.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umairkhan2582/talkastranger-stream-overlays/issues"
+  },
+  "homepage": "https://talkastranger.com/developers"
+}
