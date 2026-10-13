@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TalkAStranger Stream Overlay</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+    #overlay-container {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      max-width: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .ts-alert {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #09090b 0%, #18181b 100%);
+      border: 1px solid #a855f7;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 8px;
+      color: #fafafa;
+      animation: slideUp 0.4s ease-out, fadeOut 0.5s ease-in 4.5s forwards;
+      box-shadow: 0 4px 24px rgba(168, 85, 247, 0.2);
+    }
+    .ts-alert .icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: #a855f7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .ts-alert .content { flex: 1; }
+    .ts-alert .title { font-size: 14px; font-weight: 600; }
+    .ts-alert .message { font-size: 12px; color: #a1a1aa; margin-top: 2px; }
+    .ts-alert .gift { color: #fbbf24; font-weight: 700; }
+    .ts-backlink {
+      text-align: center;
+      font-size: 11px;
+      color: #71717a;
+      padding: 4px;
+    }
+    .ts-backlink a {
+      color: #a855f7;
+      text-decoration: none;
+      pointer-events: auto;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay-container">
+    <div id="alerts"></div>
+    <div class="ts-backlink" id="backlink"></div>
+  </div>
+  <script src="stream-overlay.js"></script>
+</body>
+</html>
