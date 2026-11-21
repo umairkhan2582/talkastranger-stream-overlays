@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crimson Shadow Ninja - Intermission</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Trebuchet MS', sans-serif; }
+    body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: radial-gradient(circle at 70% 30%, #080102 0%, #000 100%);
+      color: #ffe4e6; padding: 60px; display: flex; gap: 40px;
+    }
+    .main-pane {
+      flex: 1; display: flex; flex-direction: column; justify-content: center;
+      background: rgba(24, 4, 8, 0.92); border: 2px solid #be123c;
+      border-radius: 20px; padding: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    }
+    .chat-pane {
+      width: 480px; background: rgba(24, 4, 8, 0.92); border: 2px solid #be123c;
+      border-radius: 20px; padding: 30px; display: flex; flex-direction: column;
+    }
+    h1 { font-size: 52px; color: #fff; margin-bottom: 12px; }
+    h2 { font-size: 24px; color: #f43f5e; margin-bottom: 24px; font-weight: normal; }
+    p { font-size: 16px; color: #ffe4e6; line-height: 1.6; max-width: 600px; }
+    .chat-header { font-size: 16px; font-weight: bold; color: #e11d48; border-bottom: 1px solid #be123c; padding-bottom: 12px; margin-bottom: 16px; }
+    .mock-chat { flex: 1; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+    .chat-msg span { font-weight: bold; color: #f43f5e; }
+  </style>
+</head>
+<body>
+  <div class="main-pane">
+    <h1 id="streamer-name">BE RIGHT BACK</h1>
+    <h2>INTERMISSION IN PROGRESS</h2>
+    <p>Grab a snack, hydrate, and chill. Stream will resume in just a moment. Follow <strong id="streamer-handle">@creator</strong> for updates!</p>
+  </div>
+  <div class="chat-pane">
+    <div class="chat-header">STREAM CHAT</div>
+    <div class="mock-chat">
+      <div class="chat-msg"><span>Alex:</span> That last round was insane!</div>
+      <div class="chat-msg"><span>Nova:</span> GG everyone!</div>
+      <div class="chat-msg"><span>Pixel:</span> Brb grabbing some coffee ☕</div>
+      <div class="chat-msg"><span>Rex:</span> Don't forget to hydrate!</div>
+    </div>
+  </div>
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('name')) document.getElementById('streamer-name').textContent = p.get('name');
+    if (p.get('handle')) document.getElementById('streamer-handle').textContent = p.get('handle');
+  </script>
+</body>
+</html>

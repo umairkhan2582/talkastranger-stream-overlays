@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enchanted Forest Grove - Starting Soon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
+    body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: radial-gradient(circle at center, #030f06 0%, #000 100%);
+      color: #ecfccb; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .glow-orb {
+      position: absolute; width: 650px; height: 650px; border-radius: 50%;
+      background: radial-gradient(circle, #84cc1622 0%, transparent 70%);
+      animation: breathe 5s infinite alternate ease-in-out;
+    }
+    @keyframes breathe { 0% { transform: scale(0.9); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0.85; } }
+    .card {
+      position: relative; z-index: 10; background: rgba(6, 32, 14, 0.9);
+      border: 2px solid #166534; border-radius: 20px;
+      padding: 50px 70px; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      max-width: 800px; width: 90%;
+    }
+    h1 { font-size: 48px; letter-spacing: 4px; color: #fff; text-transform: uppercase; margin-bottom: 8px; }
+    h2 { font-size: 20px; color: #84cc16; letter-spacing: 2px; margin-bottom: 30px; font-weight: normal; }
+    .timer {
+      font-size: 72px; font-weight: 900; font-family: monospace; color: #fff;
+      background: rgba(0,0,0,0.5); border: 1px solid #166534;
+      padding: 16px 40px; border-radius: 12px; display: inline-block; margin-bottom: 30px;
+    }
+    .subtext { font-size: 14px; color: #15803d; text-transform: uppercase; letter-spacing: 2px; }
+  </style>
+</head>
+<body>
+  <div class="glow-orb"></div>
+  <div class="card">
+    <h1 id="streamer-name">BROADCAST</h1>
+    <h2>STARTING SOON</h2>
+    <div class="timer" id="countdown">05:00</div>
+    <div class="subtext" id="streamer-handle">@creator • STREAM INITIALIZING</div>
+  </div>
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('name')) document.getElementById('streamer-name').textContent = p.get('name');
+    if (p.get('handle')) document.getElementById('streamer-handle').textContent = p.get('handle');
+    let secs = parseInt(p.get('mins') || '5', 10) * 60;
+    const timerEl = document.getElementById('countdown');
+    setInterval(() => {
+      if (secs > 0) secs--;
+      const m = String(Math.floor(secs / 60)).padStart(2, '0');
+      const s = String(secs % 60).padStart(2, '0');
+      timerEl.textContent = `${m}:${s}`;
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-graffiti-urban" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d10" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#bg-graffiti-urban)" />
+  <rect x="15" y="15" width="370" height="195" rx="10" fill="rgba(22, 22, 28, 0.92)" stroke="#ea580c" stroke-width="2" />
+  <text x="35" y="55" fill="#06b6d4" font-family="system-ui" font-size="16" font-weight="bold">URBAN GRAFFITI & STREETWEAR</text>
+  <text x="35" y="80" fill="#ffffff" font-family="system-ui" font-size="11">URBAN SPRAY TAG • 3-SCENE 1080P PACK</text>
+  <rect x="35" y="105" width="200" height="85" rx="6" fill="#000000" stroke="#ea580c" stroke-width="1.5" />
+  <text x="50" y="140" fill="#ffffff" font-family="system-ui" font-size="12" font-weight="bold">HUD / START / BRB</text>
+  <text x="50" y="160" fill="#f97316" font-family="monospace" font-size="11">1920x1080 60FPS</text>
+  <rect x="250" y="105" width="115" height="40" rx="6" fill="#f97316" />
+  <text x="275" y="130" fill="#000000" font-family="system-ui" font-size="14" font-weight="bold">$10 PACK</text>
+  <text x="255" y="170" fill="#06b6d4" font-family="system-ui" font-size="11">Commercial Lic.</text>
+</svg>

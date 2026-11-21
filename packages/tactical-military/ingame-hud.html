@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Night Vision Tactical Recon - In-Game HUD</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+    body { width: 1920px; height: 1080px; overflow: hidden; background: transparent; color: #dcfce7; }
+    .cam-frame {
+      position: absolute; top: 40px; right: 40px; width: 440px; height: 260px;
+      border: 3px solid #22c55e; border-radius: 12px;
+      background: rgba(0,0,0,0.2); box-shadow: 0 0 25px #4ade8044;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 12px;
+    }
+    .cam-badge {
+      background: rgba(3, 24, 8, 0.9); border: 1px solid #16a34a;
+      padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold;
+      color: #4ade80; align-self: flex-start;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cam-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .top-bar {
+      position: absolute; top: 40px; left: 40px;
+      background: rgba(3, 24, 8, 0.9); border: 1px solid #16a34a;
+      border-radius: 10px; padding: 10px 20px; display: flex; align-items: center; gap: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-lbl { font-size: 11px; text-transform: uppercase; color: #22c55e; letter-spacing: 1px; }
+    .stat-val { font-size: 15px; font-weight: 700; color: #fff; }
+    .bottom-ticker {
+      position: absolute; bottom: 30px; left: 40px; right: 40px;
+      background: rgba(3, 24, 8, 0.9); border: 1px solid #16a34a;
+      border-radius: 10px; height: 46px; display: flex; align-items: center; padding: 0 20px; gap: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .tag { background: #22c55e; color: #000; font-weight: 800; font-size: 11px; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="stat-item"><span class="stat-lbl">Broadcaster</span><span class="stat-val" id="streamer-name">CREATOR</span></div>
+    <div class="stat-item"><span class="stat-lbl">Handle</span><span class="stat-val" id="streamer-handle">@creator</span></div>
+    <div class="stat-item"><span class="stat-lbl">Category</span><span class="stat-val" id="stream-game">Night Vision Tactical Recon</span></div>
+  </div>
+  <div class="cam-frame">
+    <div class="cam-badge"><span class="cam-dot"></span><span>LIVE BROADCAST</span></div>
+  </div>
+  <div class="bottom-ticker">
+    <span class="tag">RECENT EVENTS</span>
+    <span style="font-size: 13px; color: #dcfce7;">★ Latest Subscriber: <strong>Valkyrie99</strong></span>
+    <span style="font-size: 13px; color: #dcfce7;">♥ Top Donation: <strong>Krono ($50.00)</strong></span>
+    <span style="font-size: 13px; color: #dcfce7;">⚡ Active Goal: <strong>Subathon 82% Complete</strong></span>
+  </div>
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('name')) document.getElementById('streamer-name').textContent = p.get('name');
+    if (p.get('handle')) document.getElementById('streamer-handle').textContent = p.get('handle');
+    if (p.get('game')) document.getElementById('stream-game').textContent = p.get('game');
+  </script>
+</body>
+</html>

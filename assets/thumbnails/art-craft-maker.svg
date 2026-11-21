@@ -1,0 +1,18 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-art-craft-maker" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#120e0c" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#bg-art-craft-maker)" />
+  <rect x="15" y="15" width="370" height="195" rx="10" fill="rgba(32, 22, 18, 0.88)" stroke="#d97706" stroke-width="2" />
+  <text x="35" y="55" fill="#ec4899" font-family="system-ui" font-size="16" font-weight="bold">ARTISAN WATERCOLOR & CRAFT</text>
+  <text x="35" y="80" fill="#fef3c7" font-family="system-ui" font-size="11">WATERCOLOR STUDIO • 3-SCENE 1080P PACK</text>
+  <rect x="35" y="105" width="200" height="85" rx="6" fill="#000000" stroke="#d97706" stroke-width="1.5" />
+  <text x="50" y="140" fill="#ffffff" font-family="system-ui" font-size="12" font-weight="bold">HUD / START / BRB</text>
+  <text x="50" y="160" fill="#f59e0b" font-family="monospace" font-size="11">1920x1080 60FPS</text>
+  <rect x="250" y="105" width="115" height="40" rx="6" fill="#f59e0b" />
+  <text x="275" y="130" fill="#000000" font-family="system-ui" font-size="14" font-weight="bold">$10 PACK</text>
+  <text x="255" y="170" fill="#ec4899" font-family="system-ui" font-size="11">Commercial Lic.</text>
+</svg>
