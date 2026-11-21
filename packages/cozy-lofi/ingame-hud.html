@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cozy Lofi Cafe & Chill - In-Game HUD</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { width: 1920px; height: 1080px; overflow: hidden; background: transparent; position: relative; }
+    
+    /* Top Event Ticker */
+    .top-bar {
+      position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 24px; padding: 10px 32px;
+      background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px);
+      border: 1px solid #f472b6; border-radius: 9999px;
+      box-shadow: 0 0 20px #f472b640; color: #fff; font-size: 14px;
+    }
+    .ticker-item { display: flex; align-items: center; gap: 8px; }
+    .ticker-label { color: #f472b6; font-weight: 700; text-transform: uppercase; font-size: 11px; }
+    .ticker-val { font-weight: 600; }
+
+    /* Webcam Frame */
+    .cam-box {
+      position: absolute; bottom: 32px; left: 32px; width: 420px; height: 260px;
+      border: 2px solid #f472b6; border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 30px #f472b630, inset 0 0 15px #fbbf2420;
+      overflow: hidden;
+    }
+    .cam-label {
+      position: absolute; top: 8px; left: 12px; font-size: 11px;
+      background: #f472b6; color: #000; font-weight: 800;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+    }
+    .cam-handle {
+      position: absolute; bottom: 0; width: 100%; padding: 8px 12px;
+      background: rgba(0,0,0,0.8); border-top: 1px solid #f472b660;
+      display: flex; justify-content: space-between; font-size: 12px; color: #fff;
+    }
+
+    /* Live Chat Box */
+    .chat-container {
+      position: absolute; bottom: 32px; right: 32px; width: 360px; height: 480px;
+      background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px);
+      border: 1px solid #fbbf24; border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden;
+    }
+    .chat-header {
+      padding: 12px 16px; background: rgba(0,0,0,0.5); border-bottom: 1px solid #fbbf2450;
+      color: #fff; font-weight: 700; font-size: 13px; display: flex; justify-content: space-between;
+    }
+    .chat-messages { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; }
+    .msg { background: rgba(255,255,255,0.06); padding: 8px 12px; border-radius: 8px; font-size: 12px; color: #e2e8f0; }
+    .msg-user { color: #f472b6; font-weight: 700; }
+
+    /* Social Ticker Bottom Left */
+    .social-bar {
+      position: absolute; bottom: 300px; left: 32px; display: flex; gap: 12px;
+      background: rgba(0,0,0,0.6); padding: 6px 14px; border-radius: 8px; border: 1px solid #f472b640;
+      color: #cbd5e1; font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="ticker-item"><span class="ticker-label">Sub Goal</span><span class="ticker-val" id="sub-val">842 / 1,000</span></div>
+    <div class="ticker-item"><span class="ticker-label">Recent Sub</span><span class="ticker-val" id="recent-sub">NovaStreamz</span></div>
+    <div class="ticker-item"><span class="ticker-label">Top Donor</span><span class="ticker-val" id="top-don">ShadowByte ($50)</span></div>
+  </div>
+
+  <div class="social-bar">
+    <span>📺 @<span class="streamer-handle">ChannelName</span></span>
+    <span>⚡ <span style="color:#f472b6">Live Now</span></span>
+  </div>
+
+  <div class="cam-box">
+    <div class="cam-label">LIVE CAM</div>
+    <div class="cam-handle">
+      <span class="streamer-name">Streamer</span>
+      <span style="color:#f472b6">1080p60</span>
+    </div>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <span>STREAM CHAT</span>
+      <span style="color:#f472b6">● LIVE</span>
+    </div>
+    <div class="chat-messages">
+      <div class="msg"><span class="msg-user">PixelRider:</span> That last match was crazy! 🔥</div>
+      <div class="msg"><span class="msg-user">NeonKnight:</span> Audio is super crisp today.</div>
+      <div class="msg"><span class="msg-user">AlexG:</span> Let's goooo! Welcome in chat! 🎉</div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('handle')) document.querySelectorAll('.streamer-handle').forEach(el => el.textContent = params.get('handle'));
+    if (params.get('name')) document.querySelectorAll('.streamer-name').forEach(el => el.textContent = params.get('name'));
+  </script>
+</body>
+</html>

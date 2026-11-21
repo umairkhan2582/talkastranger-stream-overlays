@@ -1,0 +1,40 @@
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="340" rx="16" fill="#110b29"/>
+  <defs>
+    <linearGradient id="grad_retro-arcade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Subtle Grid -->
+  <path d="M0 60 H600 M0 120 H600 M0 180 H600 M0 240 H600 M0 300 H600" stroke="#facc15" stroke-opacity="0.08" stroke-width="1"/>
+  <path d="M60 0 V340 M120 0 V340 M180 0 V340 M240 0 V340 M300 0 V340 M360 0 V340 M420 0 V340 M480 0 V340 M540 0 V340" stroke="#facc15" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- Card Border -->
+  <rect x="2" y="2" width="596" height="336" rx="14" stroke="url(#grad_retro-arcade)" stroke-width="2"/>
+
+  <!-- Badge -->
+  <rect x="36" y="32" width="140" height="26" rx="6" fill="#facc15" fill-opacity="0.2"/>
+  <text x="44" y="49" fill="#facc15" font-family="Segoe UI, sans-serif" font-weight="700" font-size="11" letter-spacing="1">1080P PRO PACK</text>
+
+  <!-- Pricing Badge -->
+  <rect x="470" y="32" width="94" height="26" rx="6" fill="#ef4444" fill-opacity="0.2"/>
+  <text x="488" y="49" fill="#ef4444" font-family="Segoe UI, sans-serif" font-weight="800" font-size="12">$10 PACK</text>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="105" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-weight="900" font-size="26" letter-spacing="1">RETRO 8-BIT ARCADE</text>
+  <text x="36" y="132" fill="#facc15" font-family="Segoe UI, sans-serif" font-weight="600" font-size="13" letter-spacing="2">CRT SCANLINES • HEARTS • COINS</text>
+
+  <!-- Simulated Mockup Scenes Box -->
+  <rect x="36" y="160" width="160" height="110" rx="8" fill="#000000" fill-opacity="0.5" stroke="#facc15" stroke-opacity="0.5"/>
+  <text x="50" y="220" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-weight="700" font-size="12">In-Game HUD</text>
+
+  <rect x="220" y="160" width="160" height="110" rx="8" fill="#000000" fill-opacity="0.5" stroke="#ef4444" stroke-opacity="0.5"/>
+  <text x="236" y="220" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-weight="700" font-size="12">Starting Soon</text>
+
+  <rect x="404" y="160" width="160" height="110" rx="8" fill="#000000" fill-opacity="0.5" stroke="#facc15" stroke-opacity="0.5"/>
+  <text x="424" y="220" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-weight="700" font-size="12">Intermission</text>
+
+  <text x="36" y="305" fill="#94A3B8" font-family="Segoe UI, sans-serif" font-size="11">OBS Studio • Streamlabs • Local Browser Source • Offline Personalizer</text>
+</svg>

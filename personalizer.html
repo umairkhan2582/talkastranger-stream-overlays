@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TalkAStranger Stream Overlays - Offline Personalizer</title>
+  <style>
+    :root {
+      --primary: #a855f7;
+      --primary-hover: #9333ea;
+      --bg: #09090b;
+      --card-bg: #18181b;
+      --border: #27272a;
+      --text: #f4f4f5;
+      --text-muted: #a1a1aa;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 32px 24px; min-height: 100vh; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    header { text-align: center; margin-bottom: 36px; }
+    header h1 { font-size: 32px; font-weight: 800; background: linear-gradient(135deg, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    header p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
+
+    .grid { display: grid; grid-template-columns: 380px 1fr; gap: 28px; }
+    @media(max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+    .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    input, select {
+      width: 100%; padding: 10px 14px; background: #09090b; border: 1px solid var(--border);
+      border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus { border-color: var(--primary); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 20px; background: var(--primary); color: #fff; font-weight: 700;
+      border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 14px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-secondary { background: #27272a; margin-top: 10px; }
+    .btn-secondary:hover { background: #3f3f46; }
+
+    .preview-box {
+      position: relative; width: 100%; aspect-ratio: 16/9; background: #000;
+      border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    iframe { width: 100%; height: 100%; border: none; }
+
+    .url-output {
+      margin-top: 20px; background: #09090b; border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .url-text { font-family: monospace; font-size: 13px; color: #38bdf8; word-break: break-all; }
+    .copy-badge { font-size: 11px; background: #27272a; padding: 4px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+    .copy-badge:hover { background: var(--primary); color: #fff; }
+
+    .audio-test { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TalkAStranger Stream Overlays Personalizer</h1>
+      <p>Configure and personalize 10 premium 1080p overlay categories offline for OBS Studio & Streamlabs.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h2>🛠️ Customization Settings</h2>
+
+        <div class="form-group">
+          <label>Category Theme (10 Packs)</label>
+          <select id="theme-select">
+            <option value="cyberpunk-fps">Cyberpunk Neon Tactical FPS</option>
+            <option value="retro-arcade">Retro 8-Bit Pixel Arcade</option>
+            <option value="esports-pro">Esports Championship Pro</option>
+            <option value="minimal-glass">Minimalist Frosted Glass Studio</option>
+            <option value="cozy-lofi">Cozy Lofi Cafe & Chill</option>
+            <option value="podcast-talk">Dual Host Podcast & Talk Show</option>
+            <option value="synthwave-retro">80s Outrun Synthwave Horizon</option>
+            <option value="crypto-finance">Live Trading Desk & Finance Terminal</option>
+            <option value="irl-fitness">IRL Vlogging & Fitness Tracker</option>
+            <option value="speedrun-quest">Speedrun Master & RPG Quest</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Scene Type</label>
+          <select id="scene-select">
+            <option value="ingame-hud.html">In-Game HUD / Camera Frame</option>
+            <option value="starting-soon.html">Stream Starting Soon</option>
+            <option value="intermission.html">Intermission / Just Chatting</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Streamer Name</label>
+          <input type="text" id="streamer-name" value="NovaStreamz" />
+        </div>
+
+        <div class="form-group">
+          <label>Channel Handle (@)</label>
+          <input type="text" id="channel-handle" value="NovaStreamzLive" />
+        </div>
+
+        <div class="form-group">
+          <label>Game / Stream Title</label>
+          <input type="text" id="stream-game" value="Cyberpunk 2077: Phantom Liberty" />
+        </div>
+
+        <div class="form-group">
+          <label>Countdown Duration (Minutes)</label>
+          <input type="number" id="countdown-mins" value="5" min="1" max="60" />
+        </div>
+
+        <button class="btn" id="apply-btn">Apply & Update Preview</button>
+
+        <div class="audio-test">
+          <label>Sound Alerts Test (Web Audio Synthesizer)</label>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <button class="btn btn-secondary" onclick="playChime(587.33, 'triangle')">Follow Alert</button>
+            <button class="btn btn-secondary" onclick="playChime(880, 'sine')">Sub Alert</button>
+            <button class="btn btn-secondary" onclick="playChime(1174.66, 'square')">Donation</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🖥️ Live 1080p Preview</h2>
+        <div class="preview-box">
+          <iframe id="preview-frame" src="packages/cyberpunk-fps/ingame-hud.html"></iframe>
+        </div>
+
+        <div class="url-output">
+          <span class="url-text" id="source-url">packages/cyberpunk-fps/ingame-hud.html</span>
+          <span class="copy-badge" id="copy-btn">Copy OBS URL</span>
+        </div>
+
+        <div style="margin-top:16px; font-size:12px; color:var(--text-muted); line-height:1.6;">
+          <strong>OBS Studio Setup:</strong> Add <em>Browser Source</em> in OBS Studio, check <em>Local file</em> (or paste URL), set resolution to <strong>1920 × 1080</strong>, and check <em>Shutdown source when not visible</em>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateUrl() {
+      const theme = document.getElementById('theme-select').value;
+      const scene = document.getElementById('scene-select').value;
+      const name = encodeURIComponent(document.getElementById('streamer-name').value);
+      const handle = encodeURIComponent(document.getElementById('channel-handle').value);
+      const game = encodeURIComponent(document.getElementById('stream-game').value);
+      const mins = encodeURIComponent(document.getElementById('countdown-mins').value);
+
+      const path = `packages/${theme}/${scene}?name=${name}&handle=${handle}&game=${game}&mins=${mins}`;
+      document.getElementById('preview-frame').src = path;
+      document.getElementById('source-url').textContent = path;
+    }
+
+    document.getElementById('apply-btn').addEventListener('click', updateUrl);
+    document.getElementById('theme-select').addEventListener('change', updateUrl);
+    document.getElementById('scene-select').addEventListener('change', updateUrl);
+
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      const text = document.getElementById('source-url').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy OBS URL', 2000);
+      });
+    });
+
+    // Web Audio Synthesizer
+    let audioCtx = null;
+    function playChime(freq, type) {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.6);
+    }
+  </script>
+</body>
+</html>

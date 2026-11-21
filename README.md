@@ -1,125 +1,83 @@
-# TalkAStranger Stream Overlays
+# TalkAStranger Stream Overlays Suite
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![OBS Studio](https://img.shields.io/badge/OBS%20Studio-compatible-blue.svg)](https://obsproject.com/)
-[![Streamlabs](https://img.shields.io/badge/Streamlabs-compatible-purple.svg)](https://streamlabs.com/)
+[![OBS Studio](https://img.shields.io/badge/OBS%20Studio-1080p%20Ready-blue.svg)](https://obsproject.com/)
+[![Streamlabs](https://img.shields.io/badge/Streamlabs-Compatible-purple.svg)](https://streamlabs.com/)
+[![Scenes](https://img.shields.io/badge/Scenes-30%20HTML%20Sources-brightgreen.svg)](#overlay-categories-catalog)
+[![Pricing](https://img.shields.io/badge/Packs-%2410%20each-yellow.svg)](#pricing--licensing)
 
-> Free, open-source overlay widgets for OBS Studio and Streamlabs. Display automated TalkAStranger community alerts on your stream and share your profile with viewers.
-
----
-
-## What is This?
-
-The TalkAStranger Stream Overlay Hub provides lightweight, responsive browser-source widgets that live streamers can drop directly into **OBS Studio**, **Streamlabs**, or any broadcasting software that supports browser sources.
-
-These overlays display real-time TalkAStranger community alerts — new viewers, gifts, sparks, and match notifications — directly on your stream, while showing a link to your TalkAStranger profile so viewers can support you.
-
-### Why Use TalkAStranger Overlays?
-
-- **Free and open-source** — No cost, no ads in your overlay, no premium tiers. Just clean, professional widgets.
-- **Real-time community alerts** — TalkAStranger connects you with viewers across 107+ countries through random video chat, live streams, and community gifting.
-- **Grow your audience** — Each overlay includes a link to your TalkAStranger profile, so viewers can find and support you directly.
+> Professional, high-performance HTML5/CSS3 browser-source stream overlays for OBS Studio, Streamlabs, and Prism. Features 10 distinct categories, 30 animated 1080p/4K scenes, Web Audio synthesized alert chimes, and an offline HTML personalizer.
 
 ---
 
-## Quick Start
+## 🌟 Highlights
 
-### 1. Add Browser Source in OBS Studio
-
-1. Open **OBS Studio**
-2. Click **+** under **Sources** > **Browser**
-3. Set the URL to:
-   ```
-   https://talkastranger.com/overlay.html?streamerUsername=YOUR_USERNAME
-   ```
-4. Set width to **600** and height to **200**
-5. Click **OK** — the overlay appears on your stream
-
-### 2. Add Browser Source in Streamlabs
-
-1. Open **Streamlabs Desktop**
-2. Click **+** under **Sources** > **BrowserSource**
-3. Set the URL to:
-   ```
-   https://talkastranger.com/overlay.html?streamerUsername=YOUR_USERNAME
-   ```
-4. Set width to **600** and height to **200**
-5. Click **Done** — the overlay is live
+- **10 Distinct Categories (30 Complete Scenes):** Covers FPS & Battle Royale, Retro 8-Bit Arcade, Esports Arena, Minimalist Glassmorphism, Cozy Lofi, Dual Host Podcasts, 80s Synthwave, Crypto Trading, IRL Fitness, and RPG Speedrunning.
+- **3 Cohesive Scenes Per Pack ($10/pack):** Each category includes:
+  1. `ingame-hud.html`: Live broadcast HUD, custom webcam frame, event ticker, and transparent glassmorphism chat.
+  2. `starting-soon.html`: Dynamic animated countdown clock, rotating channel status, and ambient audio visualizer.
+  3. `intermission.html`: Just chatting / Be Right Back layout with split screen, topic highlights, and community chat.
+- **Offline Personalizer (`personalizer.html`):** Zero-coding local dashboard to customize streamer handles, channel branding, game titles, countdown timers, and color accents offline.
+- **Zero Lag / GPU Accelerated:** 100% pure vanilla HTML/CSS/JS with zero bulky runtime dependencies. Runs ultra-smoothly inside OBS Browser Sources.
+- **Web Audio Alert Chimes:** Built-in synthesizer for follow, sub, and donation chimes with zero copyrighted audio.
 
 ---
 
-## Files
+## 🎨 Overlay Categories Catalog ($10 per 3-Scene Pack)
 
-| File | Description |
-|---|---|
-| `overlay.html` | Standalone HTML widget — open directly in any browser source |
-| `stream-overlay.js` | Core JavaScript widget engine — handles alerts, animations, and profile link display |
-| `route-blueprint.md` | Server routing blueprint for `/stream/:username` dynamic profile pages |
-
----
-
-## Customization
-
-### URL Parameters
-
-| Parameter | Default | Description |
-|---|---|---|
-| `streamerUsername` | *required* | Your TalkAStranger username |
-| `theme` | `dark` | Color theme: `dark`, `light`, `ocean`, `sunset` |
-| `showProfileLink` | `true` | Show/hide the TalkAStranger profile link |
-| `position` | `bottom` | Alert position: `top`, `bottom`, `center` |
-
-### Example
-
-```
-https://talkastranger.com/overlay.html?streamerUsername=john_doe&theme=ocean&position=top
-```
+| Category | Style & Focus | Included 1080p Scenes | Preview |
+| :--- | :--- | :--- | :--- |
+| **1. Cyberpunk Neon FPS** | Futuristic glow, kill feed, telemetry, tech borders | In-Game HUD, Starting Soon, Intermission | [Thumbnail](assets/thumbnails/cyberpunk-fps.svg) |
+| **2. Retro 8-Bit Arcade** | CRT scanlines, 8-bit hearts, coin counters, retro cabinet | Arcade HUD, Insert Coin Start, Game Over BRB | [Thumbnail](assets/thumbnails/retro-arcade.svg) |
+| **3. Esports Championship Pro** | Tournament broadcast layout, match score, radar | Match Arena HUD, Roster Countdown, Post-Match | [Thumbnail](assets/thumbnails/esports-pro.svg) |
+| **4. Minimalist Frosted Glass** | Clean typography, subtle frosted blurs, camera frame | Clean Cam HUD, Ambient Aura Start, Studio Chat | [Thumbnail](assets/thumbnails/minimal-glass.svg) |
+| **5. Cozy Lofi Cafe & Chill** | Warm pastel vibes, animated coffee steam, relaxing vibes | Lofi Camera HUD, Rainy Cafe Start, Lounge BRB | [Thumbnail](assets/thumbnails/cozy-lofi.svg) |
+| **6. Dual Host Podcast** | Two-camera studio stage, dynamic active mic indicators | Dual-Cam Stage, Episode Countdown, Q&A Chat | [Thumbnail](assets/thumbnails/podcast-talk.svg) |
+| **7. 80s Synthwave Horizon** | 3D wireframe grid, retro chrome, synth sun | Neon Highway HUD, Outrun Grid Start, Cyber BRB | [Thumbnail](assets/thumbnails/synthwave-retro.svg) |
+| **8. Live Crypto Trading Desk** | Real-time style multi-ticker, market depth charts | Trading HUD, Market Open Start, Analysis Desk | [Thumbnail](assets/thumbnails/crypto-finance.svg) |
+| **9. IRL Vlogging & Fitness** | GPS route lower-third, live heart-rate/calorie display | Mobile HUD, Adventure Start, Rest Split | [Thumbnail](assets/thumbnails/irl-fitness.svg) |
+| **10. Speedrun Master RPG** | Gold/green split timers, boss health bars, PB records | Split Timer HUD, Quest Countdown, Run Recap | [Thumbnail](assets/thumbnails/speedrun-quest.svg) |
 
 ---
 
-## Self-Hosting
+## 🛠️ Quick Start & Setup
 
-You can host the overlay files locally instead of using the TalkAStranger CDN:
+### 1. Offline Personalization
+1. Open `personalizer.html` directly in any web browser (Chrome, Edge, Firefox, Brave).
+2. Select your category theme and scene.
+3. Enter your streamer name, channel handle, and game title.
+4. Click **Apply & Update Preview** to test the scene live in the 16:9 viewport.
+5. Click **Copy OBS URL**.
 
-1. Clone this repo
-2. Open `overlay.html` in your browser or serve it with any static server
-3. Add it as a browser source in OBS/Streamlabs
+### 2. Add to OBS Studio
+1. In OBS Studio, click **+** under **Sources** > **Browser**.
+2. Name the source (e.g., `Cyberpunk HUD` or `Starting Soon`).
+3. Check **Local file** and browse to the desired HTML file (e.g., `packages/cyberpunk-fps/ingame-hud.html`), or paste the parameterized local/hosted URL.
+4. Set **Width** to `1920` and **Height** to `1080`.
+5. Check **Shutdown source when not visible** to save GPU/CPU cycles.
+6. Click **OK**.
 
-```bash
-git clone https://github.com/umairkhan2582/talkastranger-stream-overlays.git
-cd talkastranger-stream-overlays
-npx serve .
-```
-
----
-
-## Country Live Lanes
-
-TalkAStranger features live streaming across 107+ countries:
-
-- **[Random video chat in United States](https://talkastranger.com/countries/us)**
-- **[Talk to strangers in United Kingdom](https://talkastranger.com/countries/gb)**
-- **[Live video chat in Pakistan](https://talkastranger.com/countries/pk)**
-- **[Free random chat in India](https://talkastranger.com/countries/in)**
-- **[Video call strangers in Brazil](https://talkastranger.com/countries/br)**
-
-[View all 107+ countries](https://talkastranger.com/countries)
+### 3. Add to Streamlabs Desktop
+1. Click **+** in the **Sources** panel.
+2. Select **Browser Source** > **Add Source**.
+3. Point to the local HTML file or hosted path.
+4. Set dimensions to `1920 x 1080`.
 
 ---
 
-## Related Projects
+## 💳 Pricing & Commercial Licensing
 
-- **[TalkAStranger Live Linker SDK](https://github.com/umairkhan2582/talkastranger-live-linker-sdk)** — Cross-broadcast TikTok and YouTube streams with direct Stripe monetization
-- **[TalkAStranger.com](https://talkastranger.com)** — Main platform
-- **[Creator Studio](https://talkastranger.com/creator-studio)** — Manage your streams and earnings
-
----
-
-## License
-
-MIT — Free to use, modify, and distribute. See [LICENSE](LICENSE) for details.
+- **Free Community Edition:** Single alert widget (`overlay.html` + `stream-overlay.js`) and sample scenes for testing.
+- **Individual 3-Scene Pack ($10 one-time):** Full commercial license for any single theme category, including all 3 animated 1080p HTML scenes, editable source code, and offline personalizer presets.
+- **All-Access Megabundle ($49 one-time):** All 10 category packages (all 30 scenes) + lifetime theme updates.
+- **Payment & Delivery:** Powered by Stripe Checkout with instant automated zip delivery.
 
 ---
 
-Made for streamers worldwide. [Go live on TalkAStranger](https://talkastranger.com).
+## 🤝 Contributing
+
+PRs and suggestions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+This repository and the base community overlays are licensed under the [MIT License](LICENSE).

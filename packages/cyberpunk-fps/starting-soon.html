@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cyberpunk Neon Tactical FPS - Starting Soon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: radial-gradient(circle at center, #090915 0%, #030712 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; color: #fff;
+    }
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(#00f0ff15 1px, transparent 1px),
+                        linear-gradient(90deg, #00f0ff15 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.6;
+    }
+    .hero-card {
+      position: relative; z-index: 10;
+      background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px);
+      padding: 60px 90px; border-radius: 28px; border: 2px solid #00f0ff;
+      box-shadow: 0 0 50px #00f0ff40, inset 0 0 20px #a855f730;
+      text-align: center;
+    }
+    .tagline {
+      font-size: 16px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase;
+      color: #00f0ff; margin-bottom: 12px;
+    }
+    .title {
+      font-size: 64px; font-weight: 900; letter-spacing: 2px; margin-bottom: 24px;
+      text-shadow: 0 0 25px #00f0ff;
+    }
+    .timer {
+      font-size: 80px; font-weight: 800; font-variant-numeric: tabular-nums;
+      color: #fff; text-shadow: 0 0 30px #a855f7; margin-bottom: 30px;
+    }
+    .status-bar {
+      display: flex; justify-content: center; gap: 30px; font-size: 15px; color: #cbd5e1;
+      padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .status-item span { color: #00f0ff; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="hero-card">
+    <div class="tagline">Gaming / FPS</div>
+    <div class="title">STREAM STARTING SOON</div>
+    <div class="timer" id="clock">04:59</div>
+    <div class="status-bar">
+      <div class="status-item">Host: <span id="host-name">Channel Host</span></div>
+      <div class="status-item">Game: <span id="game-name">Featured Broadcast</span></div>
+      <div class="status-item">Resolution: <span>1080p60 Ultra</span></div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('name')) document.getElementById('host-name').textContent = params.get('name');
+    if (params.get('game')) document.getElementById('game-name').textContent = params.get('game');
+    
+    let seconds = parseInt(params.get('mins') || '5', 10) * 60;
+    const clock = document.getElementById('clock');
+    setInterval(() => {
+      if (seconds > 0) seconds--;
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      clock.textContent = `${m}:${s}`;
+    }, 1000);
+  </script>
+</body>
+</html>

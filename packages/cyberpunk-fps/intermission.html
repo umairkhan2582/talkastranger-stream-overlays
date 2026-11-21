@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cyberpunk Neon Tactical FPS - Intermission & Chat</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: radial-gradient(circle at 70% 30%, #090915 0%, #030712 100%);
+      display: flex; padding: 48px; gap: 40px; color: #fff;
+    }
+    /* Main Screen / Cam Area */
+    .main-view {
+      flex: 2; display: flex; flex-direction: column; gap: 24px;
+    }
+    .stage-card {
+      flex: 1; border: 2px solid #00f0ff; border-radius: 20px;
+      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(16px);
+      box-shadow: 0 0 35px #00f0ff30; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stage-label {
+      position: absolute; top: 16px; left: 24px; font-weight: 800; font-size: 14px;
+      color: #00f0ff; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .stage-banner {
+      font-size: 42px; font-weight: 900; letter-spacing: 3px; text-align: center;
+      text-shadow: 0 0 20px #00f0ff;
+    }
+
+    /* Right Sidebar - Chat & Stats */
+    .sidebar {
+      flex: 1; display: flex; flex-direction: column; gap: 24px;
+    }
+    .info-box {
+      background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px);
+      border: 1px solid #a855f7; border-radius: 16px;
+      padding: 20px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .info-title { font-size: 12px; font-weight: 800; color: #a855f7; text-transform: uppercase; margin-bottom: 8px; }
+    .info-val { font-size: 16px; font-weight: 600; color: #f8fafc; }
+
+    .chat-box {
+      flex: 1; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(16px);
+      border: 1px solid #00f0ff; border-radius: 20px;
+      padding: 24px; display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .chat-head { font-weight: 800; font-size: 14px; color: #00f0ff; margin-bottom: 16px; }
+    .chat-feed { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: flex-end; }
+    .chat-msg { background: rgba(255,255,255,0.05); padding: 10px 14px; border-radius: 10px; font-size: 13px; }
+    .chat-user { color: #00f0ff; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="main-view">
+    <div class="stage-card">
+      <div class="stage-label">JUST CHATTING / BE RIGHT BACK</div>
+      <div class="stage-banner">GRAB A DRINK — BACK IN A MINUTE!</div>
+    </div>
+    <div style="display:flex; gap:20px;">
+      <div class="info-box" style="flex:1;">
+        <div class="info-title">Current Topic</div>
+        <div class="info-val" id="topic-val">Community Matchups & Game Reviews</div>
+      </div>
+      <div class="info-box" style="flex:1;">
+        <div class="info-title">Upcoming</div>
+        <div class="info-val">Boss Battle & Viewer Lobbies</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="info-box">
+      <div class="info-title">Channel Stats</div>
+      <div class="info-val">Level 24 Creator • 12.4k Follows</div>
+    </div>
+    <div class="chat-box">
+      <div class="chat-head">LIVE COMMUNITY CHAT</div>
+      <div class="chat-feed">
+        <div class="chat-msg"><span class="chat-user">Vortex:</span> Take your time! ☕</div>
+        <div class="chat-msg"><span class="chat-user">AuraNova:</span> Ready for the next round!</div>
+        <div class="chat-msg"><span class="chat-user">CyberSam:</span> Overlay looks phenomenal btw!</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('topic')) document.getElementById('topic-val').textContent = params.get('topic');
+  </script>
+</body>
+</html>
