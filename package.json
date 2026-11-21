@@ -28,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/umairkhan2582/talkastranger-stream-overlays/issues"
   },
-  "homepage": "https://talkastranger.com/developers"
+  "homepage": "https://talkastranger.com/developers",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "node test/overlays.test.js"
+  }
 }
