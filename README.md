@@ -81,3 +81,23 @@ PRs and suggestions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 ## 📄 License
 
 This repository and the base community overlays are licensed under the [MIT License](LICENSE).
+
+## 💳 Stripe Checkout & Store Setup
+
+TalkAStranger Stream Overlays uses zero-backend **Stripe Payment Links** (`buy.stripe.com`) for one-click checkout with credit card, Apple Pay, and Google Pay:
+
+1. **Category Packs:** $10 for 3 animated scenes (In-Game HUD, Starting Soon, Intermission) + audio chimes.
+2. **All-Access Bundle:** $49 for all 10 categories (30 scenes total) + commercial license and lifetime updates.
+
+### Setting Up Your Stripe Payment Links
+1. Go to your [Stripe Dashboard](https://dashboard.stripe.com/payment-links).
+2. Create a product or payment link for each $10 pack (or the $49 bundle).
+3. Set the post-purchase redirect to your release download link or private repository release.
+4. Update the links in `stripe-config.js`:
+```javascript
+paymentLinks: {
+  'all-access-bundle': 'https://buy.stripe.com/YOUR_BUNDLE_LINK',
+  'cyberpunk-fps': 'https://buy.stripe.com/YOUR_CYBERPUNK_LINK',
+  ...
+}
+```

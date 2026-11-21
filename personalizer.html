@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TalkAStranger Stream Overlays - Offline Personalizer</title>
+  <title>TalkAStranger Stream Overlays - Offline Personalizer & Store</title>
   <style>
     :root {
       --primary: #a855f7;
       --primary-hover: #9333ea;
+      --stripe: #635bff;
+      --stripe-hover: #4e44e2;
       --bg: #09090b;
       --card-bg: #18181b;
       --border: #27272a;
@@ -18,7 +20,7 @@
     body { background: var(--bg); color: var(--text); padding: 32px 24px; min-height: 100vh; }
     .container { max-width: 1200px; margin: 0 auto; }
     
-    header { text-align: center; margin-bottom: 36px; }
+    header { text-align: center; margin-bottom: 32px; }
     header h1 { font-size: 32px; font-weight: 800; background: linear-gradient(135deg, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     header p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
 
@@ -26,7 +28,9 @@
     @media(max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
     .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
-    .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #fff; display: flex; align-items: center; justify-content: space-between; }
+
+    .badge-price { background: rgba(99, 91, 255, 0.15); color: #818cf8; border: 1px solid rgba(99, 91, 255, 0.3); font-size: 11px; padding: 3px 8px; border-radius: 12px; font-weight: 700; }
 
     .form-group { margin-bottom: 18px; }
     label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
@@ -40,9 +44,11 @@
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 20px; background: var(--primary); color: #fff; font-weight: 700;
       border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 14px;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s; text-decoration: none;
     }
     .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-stripe { background: var(--stripe); color: #fff; }
+    .btn-stripe:hover { background: var(--stripe-hover); }
     .btn-secondary { background: #27272a; margin-top: 10px; }
     .btn-secondary:hover { background: #3f3f46; }
 
@@ -55,92 +61,152 @@
 
     .url-output {
       margin-top: 20px; background: #09090b; border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
     .url-text { font-family: monospace; font-size: 13px; color: #38bdf8; word-break: break-all; }
-    .copy-badge { font-size: 11px; background: #27272a; padding: 4px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
-    .copy-badge:hover { background: var(--primary); color: #fff; }
+    .action-group { display: flex; gap: 8px; }
+    .copy-badge {
+      background: #27272a; color: #fff; font-size: 12px; font-weight: 600;
+      padding: 6px 12px; border-radius: 6px; cursor: pointer; border: 1px solid #3f3f46;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .copy-badge:hover { background: #3f3f46; }
+    .buy-badge {
+      background: var(--stripe); color: #fff; font-size: 12px; font-weight: 600;
+      padding: 6px 14px; border-radius: 6px; cursor: pointer; border: none;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .buy-badge:hover { background: var(--stripe-hover); }
 
-    .audio-test { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .sound-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .sound-btn {
+      padding: 8px; background: #27272a; border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .sound-btn:hover { background: #3f3f46; }
+
+    /* Stripe Modal */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #18181b; border: 1px solid #27272a; border-radius: 16px;
+      max-width: 480px; width: 100%; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      position: relative; animation: slideUp 0.2s ease-out;
+    }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; background: transparent; border: none;
+      color: var(--text-muted); font-size: 20px; cursor: pointer;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .modal p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+    .price-card {
+      background: #09090b; border: 1px solid #27272a; border-radius: 12px; padding: 16px;
+      margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .price-card.featured { border-color: var(--stripe); background: rgba(99, 91, 255, 0.05); }
+    .price-card h4 { font-size: 15px; font-weight: 700; color: #fff; }
+    .price-card span { font-size: 12px; color: var(--text-muted); }
+    .price-val { font-size: 22px; font-weight: 800; color: #fff; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>TalkAStranger Stream Overlays Personalizer</h1>
-      <p>Configure and personalize 10 premium 1080p overlay categories offline for OBS Studio & Streamlabs.</p>
+      <h1>TalkAStranger Stream Overlays</h1>
+      <p>Configure channel branding, preview animated scenes, and unlock commercial 4K packs.</p>
     </header>
 
     <div class="grid">
+      <!-- Control Panel -->
       <div class="card">
-        <h2>🛠️ Customization Settings</h2>
+        <h2>
+          <span>Theme & Branding</span>
+          <span class="badge-price" id="theme-price-badge">$10 / Pack</span>
+        </h2>
 
         <div class="form-group">
-          <label>Category Theme (10 Packs)</label>
+          <label for="theme-select">Category / Package</label>
           <select id="theme-select">
-            <option value="cyberpunk-fps">Cyberpunk Neon Tactical FPS</option>
-            <option value="retro-arcade">Retro 8-Bit Pixel Arcade</option>
-            <option value="esports-pro">Esports Championship Pro</option>
-            <option value="minimal-glass">Minimalist Frosted Glass Studio</option>
-            <option value="cozy-lofi">Cozy Lofi Cafe & Chill</option>
-            <option value="podcast-talk">Dual Host Podcast & Talk Show</option>
-            <option value="synthwave-retro">80s Outrun Synthwave Horizon</option>
-            <option value="crypto-finance">Live Trading Desk & Finance Terminal</option>
-            <option value="irl-fitness">IRL Vlogging & Fitness Tracker</option>
-            <option value="speedrun-quest">Speedrun Master & RPG Quest</option>
+            <option value="cyberpunk-fps">Cyberpunk Neon FPS ($10)</option>
+            <option value="retro-arcade">Retro 8-Bit Pixel Arcade ($10)</option>
+            <option value="esports-pro">Esports Championship Pro ($10)</option>
+            <option value="minimal-glass">Minimalist Frosted Glass ($10)</option>
+            <option value="cozy-lofi">Cozy Lofi Cafe & Chill ($10)</option>
+            <option value="podcast-talk">Dual Host Podcast ($10)</option>
+            <option value="synthwave-retro">80s Synthwave Horizon ($10)</option>
+            <option value="crypto-finance">Live Crypto Trading Desk ($10)</option>
+            <option value="irl-fitness">IRL Vlogging & Fitness ($10)</option>
+            <option value="speedrun-quest">Speedrun Master RPG ($10)</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Scene Type</label>
+          <label for="scene-select">Scene View</label>
           <select id="scene-select">
-            <option value="ingame-hud.html">In-Game HUD / Camera Frame</option>
-            <option value="starting-soon.html">Stream Starting Soon</option>
-            <option value="intermission.html">Intermission / Just Chatting</option>
+            <option value="ingame-hud.html">In-Game HUD / Overlay</option>
+            <option value="starting-soon.html">Starting Soon Screen</option>
+            <option value="intermission.html">Intermission / Be Right Back</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Streamer Name</label>
-          <input type="text" id="streamer-name" value="NovaStreamz" />
+          <label for="streamer-name">Streamer / Channel Name</label>
+          <input type="text" id="streamer-name" value="ALEX_CYBER" placeholder="Your display name" />
         </div>
 
         <div class="form-group">
-          <label>Channel Handle (@)</label>
-          <input type="text" id="channel-handle" value="NovaStreamzLive" />
+          <label for="channel-handle">Social / Channel Handle</label>
+          <input type="text" id="channel-handle" value="@alexstream" placeholder="@channel" />
         </div>
 
         <div class="form-group">
-          <label>Game / Stream Title</label>
-          <input type="text" id="stream-game" value="Cyberpunk 2077: Phantom Liberty" />
+          <label for="stream-game">Current Activity / Category</label>
+          <input type="text" id="stream-game" value="Cyber Warfare 2026" placeholder="e.g. Just Chatting" />
         </div>
 
         <div class="form-group">
-          <label>Countdown Duration (Minutes)</label>
+          <label for="countdown-mins">Starting Countdown (Minutes)</label>
           <input type="number" id="countdown-mins" value="5" min="1" max="60" />
         </div>
 
-        <button class="btn" id="apply-btn">Apply & Update Preview</button>
+        <button class="btn" id="apply-btn">Apply & Preview</button>
+        <button class="btn btn-stripe" id="checkout-trigger-btn" style="margin-top: 10px;">
+          ⚡ Buy Commercial Pack ($10)
+        </button>
 
-        <div class="audio-test">
-          <label>Sound Alerts Test (Web Audio Synthesizer)</label>
-          <div style="display:flex; gap:8px; margin-top:6px;">
-            <button class="btn btn-secondary" onclick="playChime(587.33, 'triangle')">Follow Alert</button>
-            <button class="btn btn-secondary" onclick="playChime(880, 'sine')">Sub Alert</button>
-            <button class="btn btn-secondary" onclick="playChime(1174.66, 'square')">Donation</button>
+        <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:16px;">
+          <label>Test Built-in Audio Synthesizer</label>
+          <div class="sound-buttons">
+            <button class="sound-btn" onclick="playChime(587.33, 'triangle')">Follow</button>
+            <button class="sound-btn" onclick="playChime(880, 'sine')">Sub</button>
+            <button class="sound-btn" onclick="playChime(1174.66, 'sine')">Cheer</button>
           </div>
         </div>
       </div>
 
+      <!-- Preview Canvas -->
       <div class="card">
-        <h2>🖥️ Live 1080p Preview</h2>
+        <h2>
+          <span>Live 1080p Browser Source Canvas</span>
+          <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">1920 × 1080 Native</span>
+        </h2>
+        
         <div class="preview-box">
           <iframe id="preview-frame" src="packages/cyberpunk-fps/ingame-hud.html"></iframe>
         </div>
 
         <div class="url-output">
           <span class="url-text" id="source-url">packages/cyberpunk-fps/ingame-hud.html</span>
-          <span class="copy-badge" id="copy-btn">Copy OBS URL</span>
+          <div class="action-group">
+            <span class="copy-badge" id="copy-btn">Copy OBS URL</span>
+            <span class="buy-badge" id="quick-buy-btn">Buy Pack ($10)</span>
+          </div>
         </div>
 
         <div style="margin-top:16px; font-size:12px; color:var(--text-muted); line-height:1.6;">
@@ -150,9 +216,49 @@
     </div>
   </div>
 
+  <!-- Stripe Checkout Modal -->
+  <div class="modal-backdrop" id="stripe-modal">
+    <div class="modal">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h3 id="modal-theme-title">Unlock Theme Pack</h3>
+      <p>Instant digital download. Includes all 3 scenes in 1080p & 4K, transparent WebM assets, and commercial streaming license.</p>
+
+      <div class="price-card" id="single-pack-card">
+        <div>
+          <h4 id="modal-single-title">Selected Pack</h4>
+          <span>3 scenes (HUD, Starting Soon, Intermission)</span>
+        </div>
+        <div style="text-align:right;">
+          <div class="price-val">$10</div>
+          <button class="btn btn-stripe" id="single-checkout-btn" style="padding:6px 16px; width:auto; margin-top:4px; font-size:12px;">Checkout</button>
+        </div>
+      </div>
+
+      <div class="price-card featured" id="bundle-card">
+        <div>
+          <h4>All-Access 10-Theme Bundle</h4>
+          <span>30 total scenes + lifetime updates</span>
+        </div>
+        <div style="text-align:right;">
+          <div class="price-val" style="color:#818cf8;">$49</div>
+          <button class="btn btn-stripe" id="bundle-checkout-btn" style="padding:6px 16px; width:auto; margin-top:4px; font-size:12px;">Get Bundle</button>
+        </div>
+      </div>
+
+      <div style="font-size:11px; color:var(--text-muted); text-align:center; margin-top:12px;">
+        Secured by Stripe Checkout • Apple Pay, Google Pay, Credit Cards accepted
+      </div>
+    </div>
+  </div>
+
+  <script src="stripe-config.js"></script>
   <script>
+    function getSelectedTheme() {
+      return document.getElementById('theme-select').value;
+    }
+
     function updateUrl() {
-      const theme = document.getElementById('theme-select').value;
+      const theme = getSelectedTheme();
       const scene = document.getElementById('scene-select').value;
       const name = encodeURIComponent(document.getElementById('streamer-name').value);
       const handle = encodeURIComponent(document.getElementById('channel-handle').value);
@@ -175,6 +281,33 @@
         btn.textContent = 'Copied!';
         setTimeout(() => btn.textContent = 'Copy OBS URL', 2000);
       });
+    });
+
+    // Modal controls
+    const modal = document.getElementById('stripe-modal');
+    function openModal() {
+      const theme = getSelectedTheme();
+      const themeName = document.getElementById('theme-select').selectedOptions[0].text;
+      document.getElementById('modal-theme-title').textContent = `Unlock ${themeName}`;
+      document.getElementById('modal-single-title').textContent = `${themeName}`;
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+    }
+
+    document.getElementById('checkout-trigger-btn').addEventListener('click', openModal);
+    document.getElementById('quick-buy-btn').addEventListener('click', openModal);
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.getElementById('single-checkout-btn').addEventListener('click', () => {
+      STRIPE_CHECKOUT_CONFIG.openCheckout(getSelectedTheme());
+    });
+    document.getElementById('bundle-checkout-btn').addEventListener('click', () => {
+      STRIPE_CHECKOUT_CONFIG.openCheckout('all-access-bundle');
     });
 
     // Web Audio Synthesizer
